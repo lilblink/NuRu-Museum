@@ -1,0 +1,370 @@
+/* ==========================================================================
+   GRURU MUSEUM — Design System & Stylesheet (style.css)
+   Theme: “New Knowledge. New Storytelling. Built for Everyday Living.”
+   Style: Future Archaeology — Light Tech Aesthetic
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Light Theme Tokens (Default) */
+  --bg-primary: #F8F9FA;
+  --bg-secondary: #F2EDE3; /* Archive Paper */
+  --bg-surface: #FFFFFF;
+  --bg-surface-alt: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --border-color: #CBD5E1;
+  --border-dark: #1E293B;
+  --grid-line: rgba(148, 163, 184, 0.28);
+  --text-primary: #0F172A; /* Lab Graphite Dark */
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  
+  /* Brand Tokens */
+  --gr-lime: #D7FF3A; /* Specimen Lime (Action/Selected) */
+  --gr-ember: #FF5A1F; /* Ember Orange (Past/Era) */
+  --gr-violet: #8C6BFF; /* Quantum Violet (Future/Tech) */
+  --gr-cyan: #2EE6FF; /* Hologram Cyan (Science/Data) */
+  --gr-amber: #FFC233; /* Culture & Wisdom */
+  --gr-bio: #34E89E; /* Nature & Life */
+  --gr-coral: #FF5FA2; /* Arts & Design */
+  --gr-alert: #FF3B4E;
+
+  /* Typography */
+  --font-heading: 'Chakra Petch', sans-serif;
+  --font-body: 'IBM Plex Sans Thai', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  /* Elevation & Shadows */
+  --shadow-hard: 4px 4px 0 #0F172A;
+  --shadow-hard-hover: 6px 6px 0 #FF5A1F;
+  --shadow-glow-lime: 0 0 24px rgba(215, 255, 58, 0.5);
+  --shadow-glow-cyan: 0 0 24px rgba(46, 230, 255, 0.4);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --bg-primary: #0B0B0F; /* Void Black */
+  --bg-secondary: #12121A;
+  --bg-surface: #17171F; /* Lab Graphite */
+  --bg-surface-alt: #1F1F2B;
+  --bg-card: #17171F;
+  --border-color: #2C2C3A; /* Grid Line */
+  --border-dark: #8C6BFF;
+  --grid-line: rgba(44, 44, 58, 0.45);
+  --text-primary: #F2EDE3; /* Archive Paper */
+  --text-secondary: #CBD5E1;
+  --text-muted: #8A8A9E; /* Muted Fog */
+  --shadow-hard: 4px 4px 0 #000000;
+  --shadow-hard-hover: 6px 6px 0 #D7FF3A;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Specimen Grid Canvas Background */
+.specimen-grid-bg {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle, #94A3B8 1px, transparent 1px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: 0 0, 0 0, 0 0;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* 45° Chamfer Cut Corners (HUD Architectural Panel) */
+.hud-cut {
+  clip-path: polygon(
+    14px 0%, 100% 0%, 
+    100% calc(100% - 14px), calc(100% - 14px) 100%, 
+    0% 100%, 0% 14px
+  );
+}
+
+.hud-cut-sm {
+  clip-path: polygon(
+    8px 0%, 100% 0%, 
+    100% calc(100% - 8px), calc(100% - 8px) 100%, 
+    0% 100%, 0% 8px
+  );
+}
+
+/* Specimen Label Pill */
+.specimen-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: 2px;
+}
+[data-theme="dark"] .specimen-tag {
+  background: rgba(23, 23, 31, 0.85);
+}
+
+/* Gradients */
+.gradient-timewarp {
+  background: linear-gradient(135deg, var(--gr-ember), var(--gr-violet));
+}
+
+.gradient-text-timewarp {
+  background: linear-gradient(135deg, var(--gr-ember) 0%, var(--gr-violet) 50%, var(--gr-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Buttons with Hard Shadow */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--gr-lime);
+  color: #0B0B0F;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 24px;
+  border: 2px solid #0B0B0F;
+  box-shadow: var(--shadow-hard);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+.btn-primary:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-hard-hover);
+}
+.btn-primary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #0B0B0F;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  border-color: var(--text-primary);
+  background-color: var(--bg-surface-alt);
+}
+
+/* Header & Navigation */
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 64px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  transition: background-color var(--transition-normal);
+}
+[data-theme="dark"] header.site-header {
+  background: rgba(11, 11, 15, 0.92);
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color var(--transition-fast);
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--text-primary);
+}
+
+/* Hero Section */
+.hero-section {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 60px 24px;
+}
+
+.container-wide {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Data Booming Interactive Area */
+.booming-card {
+  background: var(--bg-surface);
+  border: 2px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  transition: box-shadow var(--transition-fast);
+}
+
+.radial-node-center {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+  box-shadow: 0 0 20px rgba(215, 255, 58, 0.4);
+}
+.radial-node-center:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 35px rgba(215, 255, 58, 0.8);
+}
+
+/* Category Badges */
+.cat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+.cat-science { background: rgba(46, 230, 255, 0.12); color: #0284c7; border-color: rgba(46, 230, 255, 0.4); }
+.cat-history { background: rgba(255, 90, 31, 0.12); color: #ea580c; border-color: rgba(255, 90, 31, 0.4); }
+.cat-tech { background: rgba(140, 107, 255, 0.12); color: #7c3aed; border-color: rgba(140, 107, 255, 0.4); }
+.cat-culture { background: rgba(255, 194, 51, 0.15); color: #d97706; border-color: rgba(255, 194, 51, 0.4); }
+.cat-nature { background: rgba(52, 232, 158, 0.15); color: #059669; border-color: rgba(52, 232, 158, 0.4); }
+.cat-arts { background: rgba(255, 95, 162, 0.12); color: #db2777; border-color: rgba(255, 95, 162, 0.4); }
+
+[data-theme="dark"] .cat-science { color: #38bdf8; }
+[data-theme="dark"] .cat-history { color: #fb923c; }
+[data-theme="dark"] .cat-tech { color: #a78bfa; }
+[data-theme="dark"] .cat-culture { color: #fbbf24; }
+[data-theme="dark"] .cat-nature { color: #34d399; }
+[data-theme="dark"] .cat-arts { color: #f472b6; }
+
+/* Interactive Graph Canvas Wrapper */
+.graph-canvas-container {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  background: var(--bg-surface);
+  border: 2px solid var(--border-dark);
+  box-shadow: var(--shadow-hard);
+  overflow: hidden;
+}
+
+/* Node Drawer / Modal */
+.specimen-drawer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  background: var(--bg-surface);
+  border: 2px solid var(--border-dark);
+  box-shadow: 8px 8px 0 #0F172A;
+  z-index: 200;
+  transform: translateY(120%);
+  transition: transform var(--transition-normal);
+}
+.specimen-drawer.open {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes pulseSubtle {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.4; }
+}
+.pulse-indicator {
+  animation: pulseSubtle 2s infinite ease-in-out;
+}
+
+/* Responsive Grid Layouts */
+.grid-12 {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .grid-12 {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-12 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .nav-links {
+    display: none;
+  }
+}
